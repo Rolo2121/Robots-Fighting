@@ -88,17 +88,25 @@ var fight = function (enemyName) {
 	} // end of while loop
 }; // end of fight function
 
-for (var i = 0; i < enemyNames.length; i++) {
-	if (playerHealth > 0) {
-		window.alert('Welcome to Robo Dome!!! Round ' + (i + 1));
-	} else {
-		window.alert('You out of health, You dead!!!');
-		break;
+var startGame = function () {
+	playerHealth = 100;
+	playerAttack = 10;
+	playerMoney = 10;
+	// debugger;
+	for (var i = 0; i < enemyNames.length; i++) {
+		if (playerHealth > 0) {
+			window.alert('Welcome to Robo Dome!!! Round ' + (i + 1));
+			var pickedEnemyName = enemyNames[i];
+			enemyHealth = 50;
+			fight(pickedEnemyName);
+		} else {
+			window.alert('You out of health, You dead!!!');
+			break;
+		}
 	}
-	var pickedEnemyName = enemyNames[i];
-	enemyHealth = 50;
-	// debugger
-	fight(pickedEnemyName);
-}
+	startGame();
+};
 
-// 3.2.8
+startGame();
+
+// 3.3.3
