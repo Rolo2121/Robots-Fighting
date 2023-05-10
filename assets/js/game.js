@@ -104,7 +104,23 @@ var startGame = function () {
 			break;
 		}
 	}
-	startGame();
+	endGame();
+};
+
+var endGame = function () {
+	if (playerHealth > 0) {
+		window.alert(
+			'Wow you have survided! You have a score of ' + playerMoney + '. '
+		);
+	} else {
+		window.alert('Game over!! How did you do? Bad!!');
+	}
+	var playAgainConfirm = window.confirm('Wanna play again?');
+	if (playAgainConfirm) {
+		startGame();
+	} else {
+		window.alert('Get Out of Here Then!!');
+	}
 };
 
 startGame();
