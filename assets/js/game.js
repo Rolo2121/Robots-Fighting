@@ -99,6 +99,14 @@ var startGame = function () {
 			var pickedEnemyName = enemyNames[i];
 			enemyHealth = 50;
 			fight(pickedEnemyName);
+			if (playerHealth > 0 && i < enemyNames.length - 1) {
+				var storeConfirm = window.confirm(
+					'The fighting has stopped, visit store?'
+				);
+				if (storeConfirm) {
+					shop();
+				}
+			}
 		} else {
 			window.alert('You out of health, You dead!!!');
 			break;
@@ -110,7 +118,7 @@ var startGame = function () {
 var endGame = function () {
 	if (playerHealth > 0) {
 		window.alert(
-			'Wow you have survided! You have a score of ' + playerMoney + '. '
+			'Wow you have survided! You have a money of ' + playerMoney + '. '
 		);
 	} else {
 		window.alert('Game over!! How did you do? Bad!!');
@@ -120,6 +128,42 @@ var endGame = function () {
 		startGame();
 	} else {
 		window.alert('Get Out of Here Then!!');
+	}
+};
+
+var shop = function () {
+	var shopOptionPrompt = window.prompt(
+		"Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+	);
+	switch (shopOptionPrompt) {
+		case 'refill':
+		case 'REFILL':
+			if (playerMoney >= 7) {
+				window.alert('Refilling health by 20 for 7 moneys.');
+				playerHealth = playerHealth + 20;
+				playerMoney = playerMoney - 7;
+			} else {
+				window.alert('You can not afford that!');
+			}
+			break;
+		case 'upgrade':
+		case 'UPGRADE':
+			if (playerMoney >= 7) {
+				window.alert('Upgrading attack by 6 for 7 moneys.');
+				playerAttack = playerAttack + 6;
+				playerMoney = playerMoney - 7;
+			} else {
+				window.alert('You can not afford that!');
+			}
+			break;
+		case 'leave':
+		case 'LEAVE':
+			window.alert('Get out then!');
+			break;
+		default:
+			window.alert('You did not pick a valid option. Try again.');
+			shop();
+			break;
 	}
 };
 
