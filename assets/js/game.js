@@ -7,6 +7,11 @@ var enemyNames = ['Calculon', 'Kitten', 'Buckets'];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
+var randomNumber = function () {
+	var value = Math.floor(Math.random() * 21) + 40;
+	return value;
+};
+
 var fight = function (enemyName) {
 	while (playerHealth > 0 && enemyHealth > 0) {
 		// ask player if they'd like to fight or run
@@ -25,14 +30,14 @@ var fight = function (enemyName) {
 			if (confirmSkip) {
 				window.alert(playerName + ' has decided to run! HaHaHa!!!');
 				// subtract money from playerMoney for skipping
-				playerMoney = playerMoney - 10;
+				playerMoney = Math.max(0, playerMoney - 10);
 				console.log('playerMoney: ', playerMoney);
 				break;
 			}
 		}
 
 		// remove enemy's health by subtracting the amount set in the playerAttack variable
-		enemyHealth = enemyHealth - playerAttack;
+		enemyHealth = Math.max(0, enemyHealth - playerAttack);
 		console.log(
 			playerName +
 				' attacked ' +
@@ -57,7 +62,7 @@ var fight = function (enemyName) {
 		}
 
 		// remove players's health by subtracting the amount set in the enemyAttack variable
-		playerHealth = playerHealth - enemyAttack;
+		playerHealth = Math.max(0, playerHealth - enemyAttack);
 		console.log(
 			enemyName +
 				' attacked ' +
@@ -89,7 +94,7 @@ var startGame = function () {
 		if (playerHealth > 0) {
 			window.alert('Welcome to Robo Dome!!! Round ' + (i + 1));
 			var pickedEnemyName = enemyNames[i];
-			enemyHealth = 50;
+			enemyHealth = randomNumber();
 			fight(pickedEnemyName);
 			if (playerHealth > 0 && i < enemyNames.length - 1) {
 				var storeConfirm = window.confirm(
@@ -161,4 +166,4 @@ var shop = function () {
 
 startGame();
 
-// 3.3.8
+// 3.4.4
